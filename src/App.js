@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { PureComponent } from 'react';
+import "react-tabs/style/react-tabs.css";
+import WorldMap from './map';
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+export default class App extends PureComponent{
+  state = {
+    countryToShow: []
+  }
 
-export default App;
+  render(){
+    const { countryToShow } = this.state;
+    return(
+      <div className="App">
+        <div className="tabs">
+          <ul>
+            <li onClick={() => this.setState({countryToShow: ['IN', 'PK', 'US']})}>
+              First
+            </li>
+            <li onClick={() => this.setState({countryToShow: ['IN', 'RU', 'CA']})}>
+              Second
+            </li>
+            <li onClick={() => this.setState({countryToShow: ['US', 'RU', 'CA']})}>
+              Third
+            </li>
+            <li onClick={() => this.setState({countryToShow: ['AF', 'PK', 'US']})}>
+              Fourth
+            </li>
+            <li onClick={() => this.setState({countryToShow: ['AF', 'IN', 'CA']})}>
+              Fifth
+            </li>
+          </ul>
+        </div>
+        <WorldMap selectedCountries={countryToShow} />
+      </div>
+    )
+  }
+}
